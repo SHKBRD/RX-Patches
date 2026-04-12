@@ -33,7 +33,7 @@ unexport STRIP
 unexport NM
 unexport RANLIB
 
-ELF2REL_BUILD := $(CURDIR)/dep/ttyd-tools/ttyd-tools/elf2rel/build
+ELF2REL_BUILD := "$(CURDIR)/dep/ttyd-tools/ttyd-tools/elf2rel/build"
 
 elf2rel:
 	@echo "Compiling elf2rel..."
