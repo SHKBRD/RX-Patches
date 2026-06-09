@@ -42,23 +42,23 @@ struct SeesawState {
 static_assert(sizeof(SeesawState) == 0x78);
 
 enum { /* The character associated with an Ape */
-    APE_AIAI=0,
-    APE_MEEMEE=1,
-    APE_BABY=2,
-    APE_GONGON=3,
-    APE_MADH=4,
-    APE_KOBUN=5,
-    APE_MALE=6,
-    APE_FEMALE=7,
-    APE_JIJI=8,
-    APE_BABA=9,
-    APE_MADSPA=10,
-    APE_MADFRG=11,
-    APE_MADNKD=12,
-    APE_ROB=13,
-    APE_WHALE=14,
-    APE_MADCRS=15,
-    APE_KOBSPA=16
+    CHARA_AIAI=0,
+    CHARA_MEEMEE=1,
+    CHARA_BABY=2,
+    CHARA_GONGON=3,
+    CHARA_MADH=4,
+    CHARA_KOBUN=5,
+    CHARA_MALE=6,
+    CHARA_FEMALE=7,
+    CHARA_JIJI=8,
+    CHARA_BABA=9,
+    CHARA_MADSPA=10,
+    CHARA_MADFRG=11,
+    CHARA_MADNKD=12,
+    CHARA_ROB=13,
+    CHARA_WHALE=14,
+    CHARA_MADCRS=15,
+    CHARA_KOBSPA=16
 };
 typedef undefined4 ApeCharacter;
 
@@ -859,61 +859,65 @@ typedef struct SomeApeState SomeApeState, *PSomeApeState;
 
 typedef struct Mal Mal, *PMal;
 
-typedef struct SKLRoot SKLRoot, *PSKLRoot;
+typedef struct ApeArchive ApeArchive, *PApeArchive;
 
-typedef struct ArcFileInfo ArcFileInfo, *PArcFileInfo;
+typedef struct Component Component, *PComponent;
 
-typedef struct SKLFile SKLFile, *PSKLFile;
-
-typedef struct GApeAnim GApeAnim, *PGApeAnim;
+typedef struct GComponentDefList GComponentDefList, *PGComponentDefList;
 
 typedef struct GmaBuffer GmaBuffer, *PGmaBuffer;
 
 enum {
-    GAME_COMMON=0,
-    GAME_MAIN=1,
-    GAME_DUMMY1=2,
-    GAME_DUMMY2=3,
-    GAME_DUMMY3=4,
-    GAME_DUMMY4=5,
-    GAME_DUMMY5=6,
-    GAME_DUMMY6=7,
-    GAME_DUMMY7=8,
-    GAME_DUMMY8=9,
-    GAME_DUMMY9=10,
-    GAME_DUMMY10=11,
-    GAME_RACE=12,
-    GAME_FGT=13,
-    GAME_PILOT=14,
-    GAME_GOLF=15,
-    GAME_BOWL=16,
-    GAME_BILL=17,
-    GAME_BOAT=18,
-    GAME_DOGF=19,
-    GAME_TENNIS=20,
-    GAME_BBALL=21,
-    GAME_GUNS=22,
-    GAME_ADV=23,
-    GAME_SEL=24,
-    GAME_COMMEND=25,
-    GAME_SCENE1A=26,
-    GAME_SCENE1B=27,
-    GAME_SCENE2=28,
-    GAME_SCENE3=29,
-    GAME_SCENE4=30,
-    GAME_SCENE5=31,
-    GAME_SCENE6=32,
-    GAME_SCENE7=33,
-    GAME_SCENE8=34,
-    GAME_SCENE9=35,
-    GAME_SCENE10=36,
-    GAME_LASTSCENE=37,
-    GAME_ENDING1=38,
-    GAME_ENDING2=39,
-    GAME_ENDING3=40,
-    GAME_ENDING4=41
+    SCENE16_COMMON=0,
+    SCENE16_MAIN=1,
+    SCENE16_DUMMY1=2,
+    SCENE16_DUMMY2=3,
+    SCENE16_DUMMY3=4,
+    SCENE16_DUMMY4=5,
+    SCENE16_DUMMY5=6,
+    SCENE16_DUMMY6=7,
+    SCENE16_DUMMY7=8,
+    SCENE16_DUMMY8=9,
+    SCENE16_DUMMY9=10,
+    SCENE16_DUMMY10=11,
+    SCENE16_RACE=12,
+    SCENE16_FGT=13,
+    SCENE16_PILOT=14,
+    SCENE16_GOLF=15,
+    SCENE16_BOWL=16,
+    SCENE16_BILL=17,
+    SCENE16_BOAT=18,
+    SCENE16_DOGF=19,
+    SCENE16_TENNIS=20,
+    SCENE16_BBALL=21,
+    SCENE16_GUNS=22,
+    SCENE16_ADV=23,
+    SCENE16_SEL=24,
+    SCENE16_COMMEND=25,
+    SCENE16_SCENE1A=26,
+    SCENE16_SCENE1B=27,
+    SCENE16_SCENE2=28,
+    SCENE16_SCENE3=29,
+    SCENE16_SCENE4=30,
+    SCENE16_SCENE5=31,
+    SCENE16_SCENE6=32,
+    SCENE16_SCENE7=33,
+    SCENE16_SCENE8=34,
+    SCENE16_SCENE9=35,
+    SCENE16_SCENE10=36,
+    SCENE16_LASTSCENE=37,
+    SCENE16_ENDING1=38,
+    SCENE16_ENDING2=39,
+    SCENE16_ENDING3=40,
+    SCENE16_ENDING4=41
 };
-typedef undefined2 ApeGame;
+typedef undefined2 SceneId16;
+
+enum { /* Whether ape models are skinning or stitching? */
+    DEFORM_SKINNING=0,
+    DEFORM_STITCHING=1
+};
+typedef undefined1 DeformType8;
 
 enum {
     FACE_BASE=0,
@@ -939,53 +943,23 @@ enum {
 };
 typedef undefined4 ApeLOD;
 
-typedef struct SKLInfo SKLInfo, *PSKLInfo;
+typedef struct ArcFileInfo ArcFileInfo, *PArcFileInfo;
 
-typedef struct gFloats gFloats, *PgFloats;
+typedef struct SkeletonState SkeletonState, *PSkeletonState;
 
-typedef struct ARCHandle ARCHandle, *PARCHandle;
+typedef struct SkeletonDef SkeletonDef, *PSkeletonDef;
 
-typedef struct SKLBone SKLBone, *PSKLBone;
-
-typedef struct g_thing g_thing, *Pg_thing;
+typedef struct GComponentDef GComponentDef, *PGComponentDef;
 
 typedef struct GmaModelEntry GmaModelEntry, *PGmaModelEntry;
 
-struct Quat {
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 w;
-} __attribute__((__packed__));
-static_assert(sizeof(Quat) == 0x10);
+typedef struct ARCHandle ARCHandle, *PARCHandle;
 
-struct gFloats {
-    short field0_0x0;
-    short field1_0x2;
-    short field2_0x4;
-    short field3_0x6;
-    struct Vec vec3;
-} __attribute__((__packed__));
-static_assert(sizeof(gFloats) == 0x14);
+typedef struct BoneState BoneState, *PBoneState;
 
-struct SKLRoot {
-    ushort bone_count;
-    ushort g_flag; /* Created by retype action */
-    float g_some_float;
-    struct SKLInfo * bones;
-    struct Quat rotation1;
-    struct Quat rotation2;
-    char * g_bone_name;
-    struct Vec translation;
-    undefined field_0x3c[0x4];
-    struct gFloats float_thing1;
-    undefined field_0x54[0x4];
-    struct gFloats float_thing2;
-    undefined field_0x6c[0x4];
-    struct SKLInfo * gBoneData;
-    undefined field_0x74[0x100];
-} __attribute__((__packed__));
-static_assert(sizeof(SKLRoot) == 0x174);
+typedef struct GSkeletonStateSubA GSkeletonStateSubA, *PGSkeletonStateSubA;
+
+typedef struct BoneKeyframe BoneKeyframe, *PBoneKeyframe;
 
 struct SomeApeState {
     u8 g_chara_idx;
@@ -1002,21 +976,11 @@ struct SomeApeState {
 } __attribute__((__packed__));
 static_assert(sizeof(SomeApeState) == 0x60);
 
-struct SKLBone {
-    short parentNumber;
-    short g_maybe_flag;
-    struct Quat Rotation1;
-    struct Quat Rotation2;
-    struct Vec Translation;
+struct ApeArchive { /* Extremely simple archive format used for packing Ape skeleton/animation files into a single file. List of pointers/offsets to objects immediately follows/ */
+    u32 count; /* Number of objects in the archive (e.g. skeletons for .ska) */
+    char * name_table; /* Pointer/offset to packed object name string list */
 } __attribute__((__packed__));
-static_assert(sizeof(SKLBone) == 0x30);
-
-struct SKLFile {
-    short bone_count;
-    undefined2 padding;
-    struct SKLBone bone_section;
-} __attribute__((__packed__));
-static_assert(sizeof(SKLFile) == 0x34);
+static_assert(sizeof(ApeArchive) == 0x8);
 
 struct ArcFileInfo {
     struct ARCHandle * Handle;
@@ -1025,12 +989,11 @@ struct ArcFileInfo {
 } __attribute__((__packed__));
 static_assert(sizeof(ArcFileInfo) == 0xc);
 
-struct g_thing {
-    undefined field_0x0[0x8];
-    char * Name;
-    undefined field_0xc[0x1c];
+struct GComponentDefList {
+    struct GComponentDef * list;
+    u32 count;
 } __attribute__((__packed__));
-static_assert(sizeof(g_thing) == 0x28);
+static_assert(sizeof(GComponentDefList) == 0x8);
 
 struct GmaBuffer { /* Represents the first 32 bytes of buffer allocated for loaded GMA files. The first 32 bytes are extra; not part of the original GMA file */
     s32 model_count;
@@ -1042,24 +1005,61 @@ struct GmaBuffer { /* Represents the first 32 bytes of buffer allocated for load
 } __attribute__((__packed__));
 static_assert(sizeof(GmaBuffer) == 0x20);
 
-struct SKLInfo {
-    char * bone_name;
-    short g_flag;
-    short parentNumber;
-    struct Vec vec3f1;
-    float vec3f1_len; /* Created by retype action */
-    struct Vec vec3f1copy;
-    float g_float;
-    Mtx g_mtx1;
-    undefined1 g_mtx2; /* Created by retype action */
-    undefined field_0x59[0x2f];
-    Mtx matrix; /* Created by retype action */
-    struct Vec vec3f3; /* Created by retype action */
-    undefined field_0xc4[0xc];
-    float g_float2;
-    undefined field_0xd4[0xa0];
+struct BoneKeyframe {
+    undefined field_0x0[0x8];
 } __attribute__((__packed__));
-static_assert(sizeof(SKLInfo) == 0x174);
+static_assert(sizeof(BoneKeyframe) == 0x8);
+
+struct GSkeletonStateSubA {
+    short field0_0x0;
+    short field1_0x2;
+    short g_anim_duration;
+    short field3_0x6;
+    undefined field_0x8[0x4];
+    float field8_0xc;
+    float field9_0x10;
+    short field10_0x14;
+    undefined field_0x16[0x2];
+} __attribute__((__packed__));
+static_assert(sizeof(GSkeletonStateSubA) == 0x18);
+
+struct SkeletonState { /* Bone state array is allocated after this */
+    u16 bone_count;
+    u16 flags;
+    float field2_0x4;
+    struct BoneState * bone_states;
+    float field4_0xc;
+    float field5_0x10;
+    float field6_0x14;
+    undefined4 field7_0x18;
+    undefined4 field8_0x1c;
+    undefined4 field9_0x20;
+    struct ApeArchive * mta;
+    undefined4 field11_0x28;
+    undefined4 field12_0x2c;
+    undefined4 field13_0x30;
+    undefined4 field14_0x34;
+    undefined4 field15_0x38;
+    void * field16_0x3c;
+    struct GSkeletonStateSubA g_skeleton_state_subA_1;
+    struct GSkeletonStateSubA g_skeleton_state_subA_2;
+} __attribute__((__packed__));
+static_assert(sizeof(SkeletonState) == 0x70);
+
+struct GComponentDef {
+    undefined field_0x0[0x8];
+    char * g_name;
+    undefined field_0xc[0x1c];
+} __attribute__((__packed__));
+static_assert(sizeof(GComponentDef) == 0x28);
+
+struct Quat {
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 w;
+} __attribute__((__packed__));
+static_assert(sizeof(Quat) == 0x10);
 
 struct ARCHandle { /* I don't actually know the struct contents in the slightest */
     void * arc_data;
@@ -1072,58 +1072,51 @@ struct ARCHandle { /* I don't actually know the struct contents in the slightest
 } __attribute__((__packed__));
 static_assert(sizeof(ARCHandle) == 0x1c);
 
-struct GApeAnim { /* Unknown length -Crafted */
-    u8 field0_0x0;
-    undefined field_0x1[0x3];
-    struct g_thing * count;
-    struct GApeAnim * ape;
-    s32 * field6_0xc; /* Ptr to some struct? */
-    undefined field_0x10[0xc];
-    s32 g_either_motion_or_skel2;
-    undefined field_0x20[0x8];
+struct SkeletonDef { /* Bone definitions immediately follow */
+    short bone_count;
+    undefined2 padding;
 } __attribute__((__packed__));
-static_assert(sizeof(GApeAnim) == 0x28);
+static_assert(sizeof(SkeletonDef) == 0x4);
+
+struct Component { /* Subcomponent of an Ape, like body, face, hands, eyes */
+    struct SkeletonState * skeleton_state;
+    struct SkeletonDef * skeleton_def;
+    struct ApeArchive * mta; /* Animation definitions */
+} __attribute__((__packed__));
+static_assert(sizeof(Component) == 0xc);
 
 struct Ape {
     struct SomeApeState * g_some_ape_state;
-    struct Mal * common_mal; /* Was originally ushort -Crafted */
-    void * game_mal; /* It's not, a lot of these labels were confusingly wrong?? - bomb Is this even a float? -Crafted */
-    struct SKLRoot * frame_ptr;
-    struct ArcFileInfo * arc_location;
-    float g_some_ptr;
-    struct SKLRoot * faceSKLStorage;
-    struct SKLFile * faceSKLFile;
-    void * faceMTA;
-    struct SKLRoot * handRSKLStorage;
-    struct SKLFile * handRSKLFile;
-    void * handrMTA;
-    struct SKLRoot * handLSKLStorage;
-    struct SKLFile * handLSKLFile;
-    void * handlMTA;
-    struct SKLRoot * tailSKLStorage;
-    struct SKLFile * tailSKLFile;
-    struct GApeAnim * animLengthBytes; /* Created by retype action */
-    struct SKLRoot * g_some_skl;
-    struct GmaBuffer * GMABuffer;
-    struct TplBuffer * TPLBuffer;
-    undefined2 field21_0x54;
+    struct Mal * common_mal;
+    void * game_mal;
+    void * field3_0xc;
+    struct ApeArchive * g_skel_ska; /* Pointer to contents of "skel.ska", which has one skeleton per character */
+    void * field5_0x14;
+    struct Component g_face_component;
+    struct Component g_handr_component;
+    struct Component g_handl_component;
+    struct Component g_tail_component;
+    struct GComponentDefList * g_component_defs;
+    struct GmaBuffer * gma;
+    struct TplBuffer * tpl;
+    undefined2 field13_0x54;
     undefined field_0x56[0x2];
-    undefined2 field24_0x58;
+    undefined2 field16_0x58;
     undefined field_0x5a[0x2];
     void * anim_func; /* Created by retype action */
     float float_0x60;
     undefined field_0x64[0x10];
-    ApeGame  game; /* Created by retype action */
-    char g_ape_variant;
+    SceneId16  scene_id; /* Created by retype action */
+    DeformType8  g_deform_type;
     undefined field_0x77[0x1];
-    int g_smth_with_game; /* Created by retype action */
-    undefined4 field49_0x7c;
-    undefined2 field50_0x80;
+    int g_smth_with_scene; /* Created by retype action */
+    undefined4 field41_0x7c;
+    undefined2 field42_0x80;
     undefined field_0x82[0x2];
-    short field53_0x84;
+    short field45_0x84;
     u8 chara_anim_type; /* Some value that changes the type of animation the character is doing. From standing still, to walking, to the "I lost" state, etc */
     byte g_anim_step;
-    int ape_total_index; /* Something to do with character spinning post-goal */
+    int g_next_ape_idx; /* Something to do with character spinning post-goal */
     ushort g_handr_short;
     ushort g_handl_short;
     ApeFace  face;
@@ -1134,92 +1127,104 @@ struct Ape {
     ushort some_flag_1;
     undefined field_0xa4[0x4];
     int g_some_length1;
-    int field75_0xac;
-    float field76_0xb0;
-    undefined4 field77_0xb4;
-    undefined4 field78_0xb8;
-    undefined4 field79_0xbc;
-    int field80_0xc0;
-    void * g_frames1[40];
-    void * field82_0x164;
-    void * field83_0x168;
-    void * field84_0x16c;
-    void * field85_0x170;
-    void * field86_0x174;
-    void * field87_0x178;
-    void * field88_0x17c;
-    void * field89_0x180;
-    void * field90_0x184;
-    void * field91_0x188;
-    void * field92_0x18c;
-    void * field93_0x190;
-    void * field94_0x194;
-    void * field95_0x198;
-    void * field96_0x19c;
-    void * field97_0x1a0;
-    void * field98_0x1a4;
-    void * field99_0x1a8;
-    void * field100_0x1ac;
-    void * field101_0x1b0;
-    void * field102_0x1b4;
-    void * field103_0x1b8;
-    void * field104_0x1bc;
-    undefined field_0x1c0[0x1c];
-    void * expression_models[9];
-    undefined field_0x200[0x4];
-    void * HandL_GHA_model;
-    void * HandL_PHA_model;
-    void * HandR_GHA_model;
-    void * HANDR_PHA_model;
+    int field67_0xac;
+    float field68_0xb0;
+    undefined4 field69_0xb4;
+    undefined4 field70_0xb8;
+    undefined4 field71_0xbc;
+    int field72_0xc0;
+    struct GmaModel * g_component_models[40];
+    struct GmaModel * g_eye_models1[15]; /* Not unique models, repeated! Blink pattern? */
+    struct GmaModel * g_eye_models2[15]; /* Same underlying models as above, but blink pattern may differ between characters?!? */
+    struct GmaModel * face_models[10];
+    struct GmaModel * hand_l_fist_model;
+    struct GmaModel * hand_l_flat_model;
+    struct GmaModel * hand_r_fist_model;
+    struct GmaModel * hand_r_flat_model;
     float float_0x214;
-    short field143_0x218;
+    short field82_0x218;
     undefined field_0x21a[0x2];
     char flag2;
     undefined field_0x21d[0x3];
     uint flag3;
     uint flag4;
     undefined field_0x228[0x14];
-    undefined4 field172_0x23c;
-    undefined4 field173_0x240;
-    int character;
+    undefined4 field111_0x23c;
+    undefined4 field112_0x240;
+    ApeCharacter  chara;
     u32 flag1;
-    undefined4 field176_0x24c;
-    undefined4 field177_0x250;
-    undefined4 field178_0x254;
+    undefined4 field115_0x24c;
+    undefined4 field116_0x250;
+    undefined4 field117_0x254;
     struct Vec pos;
     struct Vec some_vec3;
-    undefined4 field181_0x270;
-    undefined4 field182_0x274;
-    undefined4 field183_0x278;
-    undefined4 field184_0x27c;
+    undefined4 field120_0x270;
+    undefined4 field121_0x274;
+    undefined4 field122_0x278;
+    undefined4 field123_0x27c;
     float scale;
     undefined field_0x284[0x4];
-    struct Quat chara_rotation;
-    int ape_index;
-    undefined4 field192_0x29c;
+    struct Quat ape_rotation;
+    int ape_idx;
+    undefined4 field131_0x29c;
     ApeLOD  lod;
-    undefined4 field194_0x2a4;
+    undefined4 field133_0x2a4;
     float g_smth_w_velocity1;
     float g_smth_w_velocity2;
     float g_smth_w_velocity3;
     float g_smth_w_velocity4;
-    undefined4 field199_0x2b8;
+    undefined4 field138_0x2b8;
     int color_index;
     undefined field_0x2c0[0x8];
     char ball_idx; /* Created by retype action */
     byte camera_visible_bitmask;
     undefined field_0x2ca[0x2];
-    float field213_0x2cc;
-    float field214_0x2d0;
-    float field215_0x2d4;
-    float field216_0x2d8;
-    float field217_0x2dc;
-    float field218_0x2e0;
-    float field219_0x2e4;
-    float field220_0x2e8;
-    float field221_0x2ec;
+    float field152_0x2cc;
+    float field153_0x2d0;
+    float field154_0x2d4;
+    float field155_0x2d8;
+    float field156_0x2dc;
+    float field157_0x2e0;
+    float field158_0x2e4;
+    float field159_0x2e8;
+    float field160_0x2ec;
 } __attribute__((__packed__));
 static_assert(sizeof(Ape) == 0x2f0);
+
+struct BoneState {
+    char * bone_name;
+    short flags;
+    short parent_id;
+    struct Vec translation;
+    float translation_distance; /* Created by retype action */
+    struct Vec g_translation_copy;
+    float g_float1;
+    Mtx g_rotation_mtx1;
+    Mtx g_rotation_mtx2; /* Created by retype action */
+    Mtx mtx; /* Created by retype action */
+    struct Vec g_vec; /* Created by retype action */
+    undefined field_0xc4[0xc];
+    undefined4 field23_0xd0;
+    short g_keyframe_a_count[3];
+    undefined field_0xda[0x6];
+    short g_keyframe_b_count[3];
+    undefined field_0xe6[0x6];
+    short g_keyframe_c_count[3];
+    undefined field_0xf2[0x6];
+    short g_keyframe_a_unk[3];
+    undefined field_0xfe[0x6];
+    short g_keyframe_b_unk[3];
+    undefined field_0x10a[0x6];
+    short g_keyframe_c_unk[3];
+    undefined field_0x116[0x6];
+    struct BoneKeyframe * g_keyframes_a[3];
+    undefined field_0x128[0xc];
+    struct BoneKeyframe * g_keyframes_b[3];
+    undefined field_0x140[0xc];
+    struct BoneKeyframe * g_keyframes_c[3];
+    undefined field_0x158[0x1c];
+} __attribute__((__packed__));
+static_assert(sizeof(BoneState) == 0x174);
 
 struct Mal { /* Structure of common_mal ape animation files? Header size unknown atm */
     undefined field_0x0[0x21];
@@ -1623,10 +1628,9 @@ struct DVDFileInfo { /* Not entirely sure about this one... I've filled in some 
     struct DVDCommandBlock cb;
     u32 startAddr;
     u32 length;
-    struct DVDFileInfo * next;
     void (* callback)(s32, struct DVDFileInfo *);
 } __attribute__((__packed__));
-static_assert(sizeof(DVDFileInfo) == 0x40);
+static_assert(sizeof(DVDFileInfo) == 0x3c);
 
 struct DVDDiskID {
     char gameName[4];
@@ -1652,6 +1656,7 @@ struct SpriteTex {
     GXTexFmt  format;
     OSHeapHandle heap;
     struct DVDFileInfo dvd_file;
+    undefined field_0x78[0x4];
 } __attribute__((__packed__));
 static_assert(sizeof(SpriteTex) == 0x7c);
 
@@ -1799,16 +1804,6 @@ enum {
     STAGE_SELECTED=6
 };
 typedef undefined2 StoryModeStageSelectState;
-
-typedef struct GCachedFileEntry GCachedFileEntry, *PGCachedFileEntry;
-
-struct GCachedFileEntry {
-    undefined field_0x0[0x4];
-    int dvd_entrynum;
-    struct DVDCommandBlock * next; /* Created by retype action */
-    struct DVDCommandBlock * prev;
-} __attribute__((__packed__));
-static_assert(sizeof(GCachedFileEntry) == 0x10);
 
 enum {
     MF_NONE=0,
@@ -2122,6 +2117,33 @@ struct UnlockInfo { /* Info about which stuff in the game is unlocked, such as m
 } __attribute__((__packed__));
 static_assert(sizeof(UnlockInfo) == 0x84);
 
+typedef struct DigitalInputGroup DigitalInputGroup, *PDigitalInputGroup;
+
+enum { /* These are normally just #defines in the SDK's PAD library */
+    PAD_BUTTON_LEFT=1,
+    PAD_BUTTON_RIGHT=2,
+    PAD_BUTTON_DOWN=4,
+    PAD_BUTTON_UP=8,
+    PAD_TRIGGER_Z=16,
+    PAD_TRIGGER_R=32,
+    PAD_TRIGGER_L=64,
+    PAD_BUTTON_A=256,
+    PAD_BUTTON_B=512,
+    PAD_BUTTON_X=1024,
+    PAD_BUTTON_Y=2048,
+    PAD_BUTTON_START=4096
+};
+typedef undefined2 PadDigitalInput;
+
+struct DigitalInputGroup { /* Consolidated bitfields for digital button inputs corresponding to the five PadStatusGroup types */
+    PadDigitalInput  raw;
+    PadDigitalInput  prev_tick;
+    PadDigitalInput  pressed;
+    PadDigitalInput  released;
+    PadDigitalInput  repeated;
+} __attribute__((__packed__));
+static_assert(sizeof(DigitalInputGroup) == 0xa);
+
 typedef struct Ball Ball, *PBall;
 
 enum {
@@ -2225,6 +2247,25 @@ struct Ball {
 } __attribute__((__packed__));
 static_assert(sizeof(Ball) == 0x1b0);
 
+typedef struct File File, *PFile;
+
+typedef struct FileCacheEntry FileCacheEntry, *PFileCacheEntry;
+
+struct FileCacheEntry {
+    s32 has_data;
+    s32 entry_num;
+    u32 aram_addr;
+    u32 aram_size;
+} __attribute__((__packed__));
+static_assert(sizeof(FileCacheEntry) == 0x10);
+
+struct File {
+    BOOL32 is_cached;
+    struct DVDFileInfo dvd_file_info;
+    struct FileCacheEntry cache_entry;
+} __attribute__((__packed__));
+static_assert(sizeof(File) == 0x50);
+
 typedef struct SmWorldInfo SmWorldInfo, *PSmWorldInfo;
 
 typedef struct SmStageInfo SmStageInfo, *PSmStageInfo;
@@ -2241,6 +2282,52 @@ struct SmStageInfo { /* A list of 10 of these is used to define a world */
     s16 difficulty;
 } __attribute__((__packed__));
 static_assert(sizeof(SmStageInfo) == 0x4);
+
+enum {
+    SCENE_COMMON=0,
+    SCENE_MAIN=1,
+    SCENE_DUMMY1=2,
+    SCENE_DUMMY2=3,
+    SCENE_DUMMY3=4,
+    SCENE_DUMMY4=5,
+    SCENE_DUMMY5=6,
+    SCENE_DUMMY6=7,
+    SCENE_DUMMY7=8,
+    SCENE_DUMMY8=9,
+    SCENE_DUMMY9=10,
+    SCENE_DUMMY10=11,
+    SCENE_RACE=12,
+    SCENE_FGT=13,
+    SCENE_PILOT=14,
+    SCENE_GOLF=15,
+    SCENE_BOWL=16,
+    SCENE_BILL=17,
+    SCENE_BOAT=18,
+    SCENE_DOGF=19,
+    SCENE_TENNIS=20,
+    SCENE_BBALL=21,
+    SCENE_GUNS=22,
+    SCENE_ADV=23,
+    SCENE_SEL=24,
+    SCENE_COMMEND=25,
+    SCENE_SCENE1A=26,
+    SCENE_SCENE1B=27,
+    SCENE_SCENE2=28,
+    SCENE_SCENE3=29,
+    SCENE_SCENE4=30,
+    SCENE_SCENE5=31,
+    SCENE_SCENE6=32,
+    SCENE_SCENE7=33,
+    SCENE_SCENE8=34,
+    SCENE_SCENE9=35,
+    SCENE_SCENE10=36,
+    SCENE_LASTSCENE=37,
+    SCENE_ENDING1=38,
+    SCENE_ENDING2=39,
+    SCENE_ENDING3=40,
+    SCENE_ENDING4=41
+};
+typedef undefined4 SceneId32;
 
 enum {
     DMD_SCEN_1ST_INIT=0,
@@ -2349,14 +2436,24 @@ struct StoryModeSaveFile {
 } __attribute__((__packed__));
 static_assert(sizeof(StoryModeSaveFile) == 0x84);
 
-typedef struct GBone GBone, *PGBone;
+typedef struct BoneChannel BoneChannel, *PBoneChannel;
 
-struct GBone {
-    struct SKLFile * SKLData;
-    void * MTAData;
-    void * UnknownPtr;
+struct BoneChannel {
+    u16 keyframe_count;
+    u16 padding;
 } __attribute__((__packed__));
-static_assert(sizeof(GBone) == 0xc);
+static_assert(sizeof(BoneChannel) == 0x4);
+
+typedef struct BoneDef BoneDef, *PBoneDef;
+
+struct BoneDef { /* Null-terminated bone name directly follows, followed by 4(?) byte-aligned next bone */
+    short parent_bone_id;
+    short flags;
+    struct Quat g_rotation1;
+    struct Quat g_rotation2;
+    struct Vec translation;
+} __attribute__((__packed__));
+static_assert(sizeof(BoneDef) == 0x30);
 
 typedef struct RankingEntry RankingEntry, *PRankingEntry;
 
@@ -2379,6 +2476,14 @@ struct GTableEntry {
     undefined field_0x4[0x8];
 } __attribute__((__packed__));
 static_assert(sizeof(GTableEntry) == 0xc);
+
+typedef struct BoneAnim BoneAnim, *PBoneAnim;
+
+struct BoneAnim {
+    ushort channels_bitfield;
+    undefined2 field1_0x2;
+} __attribute__((__packed__));
+static_assert(sizeof(BoneAnim) == 0x4);
 
 typedef struct theme_light theme_light, *Ptheme_light;
 
@@ -2858,33 +2963,9 @@ struct MemCardInfo { /* Some struct that seems to hold per-memcard info; there a
 } __attribute__((__packed__));
 static_assert(sizeof(MemCardInfo) == 0x44);
 
-typedef struct GSomeFileStruct GSomeFileStruct, *PGSomeFileStruct;
-
-struct GSomeFileStruct {
-    BOOL32 dvd_entrynum;
-    struct DVDFileInfo dvdFileInfo;
-} __attribute__((__packed__));
-static_assert(sizeof(GSomeFileStruct) == 0x44);
-
 typedef struct PadStatusGroup PadStatusGroup, *PPadStatusGroup;
 
 typedef struct PADStatus PADStatus, *PPADStatus;
-
-enum { /* These are normally just #defines in the SDK's PAD library */
-    PAD_BUTTON_LEFT=1,
-    PAD_BUTTON_RIGHT=2,
-    PAD_BUTTON_DOWN=4,
-    PAD_BUTTON_UP=8,
-    PAD_TRIGGER_Z=16,
-    PAD_TRIGGER_R=32,
-    PAD_TRIGGER_L=64,
-    PAD_BUTTON_A=256,
-    PAD_BUTTON_B=512,
-    PAD_BUTTON_X=1024,
-    PAD_BUTTON_Y=2048,
-    PAD_BUTTON_START=4096
-};
-typedef undefined2 PadDigitalInput;
 
 struct PADStatus {
     PadDigitalInput  button; /* Or-ed PAD_BUTTON_* and PAD_TRIGGER_* bits */
@@ -2909,17 +2990,6 @@ struct PadStatusGroup { /* A set of PADStatus structs for a given controller, wi
     struct PADStatus repeated; /* PADStatus of digital inputs that "repeat" similar to holding a key down on a keyboard: bit is high on first press, then there's a pause of many frames, then the bit is high every 4 frames */
 } __attribute__((__packed__));
 static_assert(sizeof(PadStatusGroup) == 0x3c);
-
-typedef struct DigitalInputGroup DigitalInputGroup, *PDigitalInputGroup;
-
-struct DigitalInputGroup { /* Consolidated bitfields for digital button inputs corresponding to the five PadStatusGroup types */
-    PadDigitalInput  raw;
-    PadDigitalInput  prev_tick;
-    PadDigitalInput  pressed;
-    PadDigitalInput  released;
-    PadDigitalInput  repeated;
-} __attribute__((__packed__));
-static_assert(sizeof(DigitalInputGroup) == 0xa);
 
 enum { /* Some flags that get set during render loops, perhaps? */
     RENDERFLAG_NONE=0,
@@ -2981,6 +3051,14 @@ enum {
     LETTERBOX=2
 };
 typedef undefined1 WidescreenMode;
+
+typedef struct SkeletonAnim SkeletonAnim, *PSkeletonAnim;
+
+struct SkeletonAnim {
+    short g_unk1;
+    short bone_count;
+} __attribute__((__packed__));
+static_assert(sizeof(SkeletonAnim) == 0x4);
 
 typedef struct MemCardFile MemCardFile, *PMemCardFile;
 
@@ -3310,6 +3388,29 @@ enum { /* Abbreviated "ET" in the game */
 };
 typedef undefined2 EffectType;
 
+typedef struct GApeAnim GApeAnim, *PGApeAnim;
+
+typedef struct g_thing g_thing, *Pg_thing;
+
+struct g_thing {
+    undefined field_0x0[0x8];
+    char * Name;
+    undefined field_0xc[0x1c];
+} __attribute__((__packed__));
+static_assert(sizeof(g_thing) == 0x28);
+
+struct GApeAnim { /* Unknown length -Crafted */
+    u8 field0_0x0;
+    undefined field_0x1[0x3];
+    struct g_thing * count;
+    struct GApeAnim * ape;
+    s32 * field6_0xc; /* Ptr to some struct? */
+    undefined field_0x10[0xc];
+    s32 g_either_motion_or_skel2;
+    undefined field_0x20[0x8];
+} __attribute__((__packed__));
+static_assert(sizeof(GApeAnim) == 0x28);
+
 enum {
     GX_USAGE_NONE=0,
     GX_USAGE_LOCKED_CACHE_ENABLED=2,
@@ -3373,6 +3474,12 @@ struct Effect {
     undefined field_0xa4[0xc];
 } __attribute__((__packed__));
 static_assert(sizeof(Effect) == 0xb0);
+
+enum { /* Whether ape models are skinning or stitching? */
+    DEFORM32_SKINNING=0,
+    DEFORM32_STITCHING=1
+};
+typedef undefined4 DeformType32;
 
 enum {
     PMT_UNKNOWN0=0,
@@ -5989,17 +6096,26 @@ extern "C" {
     extern pointer switchdataD_803d1624;
     extern pointer switchdataD_803d1c2c;
     extern undefined * switchdataD_803d35f0;
-    extern undefined * postfix_table;
-    extern undefined * postfix_table_s;
-    extern undefined * ape_name_enum;
+    extern undefined4 g_mini_race_scene;
+    extern undefined4 g_mini_target_scene;
+    extern undefined4 g_mini_bowling_scene;
+    extern undefined4 g_mini_billiards_scene;
+    extern struct GComponentDef g_aiai_lod0_skel_def2_list[8];
+    extern struct GComponentDef g_aiai_lod1_skel_def2_list[8];
+    extern struct GComponentDef g_aiai_lod3_lod4_skel_def2_list[7];
+    extern struct GComponentDefList g_component_defs[68];
+    extern char * ape_lod_names[8];
+    extern undefined * chara_names;
     extern undefined * storymode_ape_enum;
     extern undefined * ape_lod_enum;
+    extern pointer g_mesh_type_name;
     extern undefined * eye_string_table;
-    extern char * * eye_name_table[17];
-    extern undefined * game_name_enum;
-    extern char * enum_face_types[9];
+    extern undefined * aiai_eye_model_names;
+    extern char * * g_per_chara_blink_models[17];
+    extern undefined * scene_names;
+    extern char * ape_face_names[9];
     extern undefined * ape_face_enum_alt;
-    extern undefined * ape_face_enum_monkey;
+    extern undefined * ape_face_expr_names;
     extern char s_ape[4];
     extern undefined * switchdataD_803d9220;
     extern char DIP_APENUM_FORMAT[5];
@@ -6332,8 +6448,9 @@ extern "C" {
     extern undefined4 disc_queue_start;
     extern undefined4 disc_queue_end;
     extern undefined4 discQueueGroup;
-    extern struct GCachedFileEntry g_cached_file_entries[128];
+    extern struct FileCacheEntry file_cache_entries[128];
     extern undefined4 g_last_filename_attempted_to_open;
+    extern undefined4 g_aram_read_pending;
     extern undefined4 g_minigame_tick_func;
     extern undefined4 g_mini_draw_func_ptr;
     extern undefined1 g_haze_type;
@@ -6358,24 +6475,24 @@ extern "C" {
     extern float g_avdisp_bound_sphere_scale;
     extern float g_avdisp_material_alpha;
     extern Mtx avdisp_tex_mtx;
-    extern undefined main_mta_storage;
-    extern struct GBone face_bones[16];
-    extern struct GBone handR_bones[16];
-    extern struct GBone tailBone;
-    extern struct GBone handLbones[16];
+    extern struct Component g_main_components[17];
+    extern struct Component g_face_components[17];
+    extern struct Component g_handr_components[17];
+    extern struct Component g_tail_component;
+    extern struct Component g_handl_components[17];
     extern void * common_anim_storage[17];
     extern void * game_mal_storage[17];
-    extern struct ArcFileInfo * arc_location;
+    extern struct ApeArchive * skel_ska;
     extern void * common_mal_sizes[17];
     extern int game_mal_sizes[17];
     extern void * ape_tpls[68];
     extern void * rep_tpl_table[17];
     extern void * ape_gma_table[68];
-    extern struct ARCHandle ape_skl_arc_handle;
-    extern void * ape_skl_arc_data;
-    extern Mtx g_common_mtx;
-    extern float g_some_floats[64];
-    extern undefined ape_ref_count_table;
+    extern struct ARCHandle arc_file_handle;
+    extern void * skl_arc;
+    extern Mtx g_common_ape_mtx;
+    extern float g_ape_floats[64];
+    extern int ape_ref_count_table[136];
     extern struct Ape * registered_apes[64];
     extern undefined4 total_apes_registered;
     extern undefined4 g_ptr_to_something;
@@ -7558,10 +7675,10 @@ extern "C" {
     void GXInitXfRasMetric(void);
     void GXReadXfRasMetric(undefined4 * param_1, undefined4 * param_2, undefined4 * param_3, undefined4 * param_4);
     undefined4 ARCInitHandle(void * arc_data, struct ARCHandle * out_arc_handle);
-    BOOL32 ARCOpen(struct ARCHandle * arc_handle, char * file, struct ArcFileInfo * arcFileInfo);
+    BOOL32 ARCOpen(struct ARCHandle * arc_handle, void * filebuf, struct ArcFileInfo * arcFileInfo);
     uint arc_path_to_entrynum(struct ARCHandle * arcHandle, char * file);
     void arc_get_dir(int param_1, int param_2, int param_3);
-    int ARCGetStartAddrInMem(undefined4 * param_1);
+    void * ARCGetStartAddrInMem(struct ArcFileInfo * af);
     undefined4 arcGetLength(struct ArcFileInfo * fileInfo);
     undefined4 return_1(void);
     void g_some_perf_init_func(void);
@@ -7710,7 +7827,7 @@ extern "C" {
     void macHandleActive(int * param_1);
     void macHandle(uint param_1);
     void macSampleEndNotify(int * param_1);
-    uint macSetExternalKeyoff(int * param_1);
+    int macSetExternalKeyoff(int * param_1);
     void macSetPedalState(int * param_1, int param_2);
     void TimeQueueAdd(int param_1);
     void UnYieldMacro(int * param_1, int param_2);
@@ -8112,7 +8229,7 @@ extern "C" {
     void g_maybe_something_with_normals(int param_1);
     void g_init_gma(struct GmaBuffer * gma_buffer, struct Gma * gma_header, struct TplBuffer * tpl);
     int g_init_gma_model_materials(struct GmaModel * model, struct TplBuffer * tpl, struct GXTexObj * texobj_array);
-    void g_memcpy_using_locked_cache(void * dest, void * curr_src_1_1_1_1_1_1_1_1_1_1_1_1_1, size_t count);
+    void g_memcpy_using_locked_cache(void * dest, void * curr_src_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1, size_t count);
     void g_something_with_locked_cache_2(void * param_1, uint param_2, uint param_3);
     void memcpy2(void * dest, void * src, size_t count);
     int * __va_arg(char * param_1, int param_2);
@@ -8496,7 +8613,7 @@ extern "C" {
     void take_pausemenu_screenshot(void * out_image_buffer, undefined4 src_left_px, undefined4 src_top_px, short width_px, short height_px, GXTexFmt  fmt);
     void init_pausemenu_screenshot_texobj(struct GXTexObj * param_1);
     void g_draw_pausemenu_screenshot(struct GXTexObj * tex);
-    void md_adv_func(void);
+    uint md_adv_func(void);
     void empty_function(void);
     void empty_function(void);
     void smd_adv_logo_init(void);
@@ -8537,7 +8654,7 @@ extern "C" {
     void create_demo_mask_sprites(void);
     void sprite_demo_mask_banana_tick(u8 * status, struct Sprite * sprite);
     void g_set_lots_of_initial_state(void);
-    void md_sel_func(void);
+    uint md_sel_func(void);
     void smd_sel_ngc_dest(void);
     void g_return_to_sel_ngc(undefined4 param_1);
     void g_load_stage_for_menu_bg(char param_1, int param_2);
@@ -8793,7 +8910,7 @@ extern "C" {
     void event_adx_init(undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4, undefined8 param_5, undefined8 param_6, undefined8 param_7, undefined8 param_8, undefined4 param_9, undefined4 param_10, undefined4 param_11, undefined4 param_12, undefined4 param_13, undefined4 param_14, undefined4 param_15, undefined4 param_16);
     void event_adx_tick(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8);
     void event_adx_dest(void);
-    void g_adx_error_call_back(undefined4 param_1, undefined4 param_2);
+    void g_adx_error_call_back(undefined4 param_1, char * param_2);
     void g_draw_ingame_debug_menu(uint * param_1, int param_2);
     void g_draw_debug_window_boundaries(uint * param_1);
     void draw_debugtext(void);
@@ -9458,6 +9575,7 @@ extern "C" {
     void calc_sprite_bounds(struct Sprite * sprite, s32 * left, s32 * top, s32 * right, s32 * bottom);
     void g_get_font_char_width(char * character, Font32  font, struct FontDefinition * g_font_struct);
     double g_get_font_char_width_scaling(char * character, Font32  font);
+    undefined * textdraw_parse_control_code(uint * state, byte * text, uint * color, int * consumed, uint * font);
     void textdraw_reset(void);
     void textdraw_set_font(Font32  font_type);
     void textdraw_set_mul_color(uint param_1);
@@ -9575,7 +9693,7 @@ extern "C" {
     void g_sprite_extra_all_mask_tick(u8 * status, struct Sprite * sprite);
     void g_sprite_go_to_the_tick(u8 * status, struct Sprite * sprite);
     void g_sprite_go_to_the_disp(struct Sprite * sprite);
-    void create_postgoal_score_sprites(undefined4 param_1, undefined4 param_2, uint param_3);
+    void create_postgoal_score_sprites(int param_1, int param_2, uint param_3);
     void sprite_clear_score_disp(struct Sprite * sprite);
     void sprite_warp_bonus_disp(struct Sprite * sprite);
     void sprite_time_bonus_disp(struct Sprite * sprite);
@@ -9646,11 +9764,11 @@ extern "C" {
     void g_some_arq_callback(u32 pointerToARQRequest);
     void load_disc_queue(void);
     BOOL32 g_something_with_dvd(s32 entry_num, undefined4 * param_2);
-    BOOL32 dvd_open_file(char * file_path, struct GSomeFileStruct * fileStruct);
-    BOOL32 dvd_close(struct GSomeFileStruct * file);
-    void g_some_ARQPostRequest_callback(void);
-    u32 dvd_read_file_into_buffer(int * dvdEntrynum, void * buffer, u32 length, int offset);
-    int get_file_size(struct GSomeFileStruct * file_struct);
+    BOOL32 file_open(char * file_path, struct File * file);
+    BOOL32 file_close(struct File * file);
+    void ARQPostRequest_on_finish(void);
+    u32 file_read(struct File * file, void * buffer, u32 length, int offset);
+    int file_size(struct File * file);
     void g_some_dvd_callback(s32 result, struct DVDFileInfo * fileInfo);
     void g_something_with_dvd2(uint param_1, int param_2);
     int add_one_wrap_if_over127(int num);
@@ -9665,7 +9783,7 @@ extern "C" {
     void g_some_shadow_draw_func(struct ShadowReceive * shadow_receive);
     undefined4 g_check_some_condition(ushort param_1);
     void debug_draw_shadow_textures(void);
-    void md_mini_func(void);
+    uint md_mini_func(void);
     void g_set_minigame_specific_funcs(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
     void g_smd_mini_generic_init(void);
     void g_smd_mini_generic_tick(void);
@@ -9824,30 +9942,31 @@ extern "C" {
     void g_apply_wormhole_pos_to_camera(struct Vec * camera_pos, struct Vec * camera_vel, Mtx * mtx);
     void apply_wormhole_tf_to_quat(struct Quat * quat, Mtx * wormhole_tf);
     void empty_function(void);
-    void g_load_skl(struct SKLRoot * sklRoot, struct SKLInfo * boneData, struct SKLFile * sklFile);
-    void g_handL_SKL_func(void * param_1, int param_2);
-    void gan_setanim_wrapper(void * param_1, char * param_2);
-    void gan_setAnim(void * mal, undefined * param_2, short animation_number);
-    void gan_setanim_edance(undefined4 param_1, undefined param_2, uint param_3, uint param_4, uint param_5);
-    void g_init_floatthing(struct gFloats * param_1);
-    void gan_incframe(double g_speed, struct Ape * ape);
+    void init_component_state(struct SkeletonState * component_state, struct BoneState * bone_states, struct SkeletonDef * skl);
+    void g_init_some_handl_component_stuff(struct SkeletonState * component_state, undefined4 * param_2);
+    void g_init_mta(struct SkeletonState * skeleton_state, struct ApeArchive * mta);
+    void g_some_ape_anim_init_wrapper(void * param_1, char * param_2);
+    void g_init_skeleton_animation(struct SkeletonState * skeleton_state, void * param_2, short g_anim_id);
+    void g_unk_ape_anim1(undefined4 param_1, undefined param_2, uint param_3, uint param_4, uint param_5);
+    void g_init_bone_state_subA(struct GSkeletonStateSubA * param_1);
+    void g_unk_ape_anim2(double g_speed, struct Ape * ape);
     void g_set_more_ape_state(undefined2 * param_1, undefined2 * param_2);
     void g_smth_with_quat_slerp(ushort * param_1);
-    void g_something_arc(struct ArcFileInfo * fileInfo);
-    uint g_table_index(struct SKLRoot * param1, char * str);
-    void load_ape_body(int ape_index, int game_index);
-    void gan_setanim_estagebegin(struct Ape * ape, int chara_index, int scene_index);
+    void ape_archive_offsets_to_pointers(struct ApeArchive * g_ska);
+    uint g_table_index(undefined param1, char * str);
+    void g_load_ape_mtas(ApeCharacter  chara, SceneId32  scene_id);
+    void g_init_mtas(struct Ape * ape, ApeCharacter  chara, SceneId32  scene_id);
     void g_something_freeing_chara_heap_3(int * param_1);
-    void g_something_with_new_ape(struct Ape * ape, int chara_index, int scene_index);
-    ulonglong event_ape_init(void);
+    void g_load_ape_mals(struct Ape * ape, ApeCharacter  chara, SceneId32  scene_id);
+    void event_ape_init(void);
     void event_ape_tick(void);
     void event_ape_dest(void);
-    Ape * load_ape(int chara_index, ApeLOD  LOD, int game_index, int s_mal);
-    Ape * load_ape_s(int chara_id, int LOD, int game_index);
-    Ape * load_ape_gameplay(int monkey_id, undefined4 LOD, int g_variant);
-    Ape * load_ape_gameplay_LOD(int monkey_id, ApeLOD  LOD);
+    Ape * load_ape(ApeCharacter  chara, ApeLOD  ape_lod, SceneId32  scene_id, DeformType32  deform_type);
+    Ape * g_load_ape_variant0(ApeCharacter  chara, ApeLOD  lod, SceneId32  scene_id);
+    Ape * load_ape_gameplay(ApeCharacter  chara, undefined4 lod, int g_ape_variant);
+    Ape * g_load_ape_gameplay_variant0(ApeCharacter  chara, ApeLOD  lod);
     void draw_ape_subroutine(int param_1);
-    void g_draw_ape1(double param_1, struct Ape * ape2);
+    void g_draw_ape(double param_1, struct Ape * ape);
     void draw_ape(struct Ape * ape);
     void g_something_with_freeing_chara_heap_ape(struct Ape * ape);
     void ape_default_anim(struct Ape * ape);
@@ -9855,31 +9974,32 @@ extern "C" {
     void g_load_mal_files_from_disc(int chara_index, int LOD, int s_mal, int game_index);
     void g_something_freeing_chara_heap_4(int param_1, int param_2, int param_3);
     void g_something_freeing_chara_heap_2(int param_1, int param_2);
-    void assign_model_pointers(struct Ape * ape, ApeLOD  lod);
-    int gan_getsomeframe(struct Ape * ape, int index);
+    void assign_ape_assets(struct Ape * ape, ApeLOD  lod);
+    BoneState * g_get_ape_anim_smth(struct Ape * ape, int index);
     double body_frame_add72(struct Ape * ape);
-    undefined * get_ape_game_string(struct Ape * ape);
+    char * get_ape_scene_name(struct Ape * ape);
     int get_ape_anim_flags(struct Ape * ape, undefined4 param_2, int param_3);
-    void preload_ape(int chara_index, int LOD, int s_mal, int game_index);
-    void g_load_ape_mta_mal_files(int game_index, int chara_index);
+    void preload_ape(ApeCharacter  chara, ApeLOD  lod, int s_mal, int scene_id);
+    void g_queue_ape_mta_mal_load(int scene_id, ApeCharacter  chara);
     uint g_something_with_comparing_strings(undefined4 param_1, char * param_2);
     void register_ape(struct Ape * ape);
     void unregister_ape(struct Ape * ape);
-    Ape get_ape_index(struct Ape * __return_storage_ptr__, int index);
+    Ape * get_ape_by_idx(int param_1);
     void dip_apenum_draw(struct Ape * ape);
-    char * get_ape_name_string(struct Ape * ape);
+    char * get_ape_chara_name(struct Ape * ape);
     char * get_ape_lod_string(struct Ape * ape);
-    char * get_ape_face_string(struct Ape * ape);
+    char * g_get_ape_skinning_or_stitching_name(struct Ape * ape);
+    char * get_ape_face_expr_name(struct Ape * ape);
     int seek(char * param_1);
-    void g_load_models(struct Ape * ape);
+    void assign_ape_models(struct Ape * ape);
     SomeApeState * g_get_structure_from_ape_common_mal_struct(struct Mal * common_mal);
     void g_something_freeing_heap_3(void * param_1);
     int g_get_ape_flag(struct Ape * ape, undefined4 g_something_with_game, int param_3);
     undefined4 g_alloc_some_ape_state_0x8(struct SomeApeState * g_some_ape_state, int chara_idx);
-    void gan_setanim_e4(struct Ape * ape);
+    void g_ape_anim_unk3(struct Ape * ape);
     void g_set_ape_dance_state1(int param_1, int param_2, undefined2 param_3, int param_4, undefined4 param_5, undefined4 param_6, int param_7);
     void g_set_ape_dance_state2(struct SomeApeState * g_some_ape_state, uint param_2, uint param_3, int param_4, int param_5, undefined4 param_6, undefined4 param_7, int param_8);
-    void gan_setAnim2(struct Ape * ape, int param_2, short * param_3);
+    void g_ape_anim_unk4(struct Ape * ape, int param_2, short * param_3);
     int g_some_ape_anim_func2(int param_1, int param_2, undefined4 param_3, undefined4 param_4, int param_5);
     void g_set_ape_stuff_in_chara_heap(undefined2 * param_1, undefined2 * param_2);
     void g_something_with_GXPeekZ(void);
@@ -9927,7 +10047,7 @@ extern "C" {
     void smd_author_play_ending_init(void);
     void smd_author_play_from_sel(void);
     void smd_author_play_ret_sel(void);
-    void md_author_func(void);
+    uint md_author_func(void);
     void author_draw_func(void);
     void g_assign_new_main_and_sub_mode_for_play_tick(MainMode  param_1, SubMode  param_2);
     void g_set_some_author_tick_func(undefined4 param_1);
@@ -9972,7 +10092,7 @@ extern "C" {
     void main_game_rel_prolog(void);
     void main_game_rel_epilog(void);
     void main_game_rel_unlinked(void);
-    void md_game_func(void);
+    uint md_game_func(void);
     void smd_game_first_init(void);
     void smd_game_restart_init(void);
     void smd_game_ready_init(void);
@@ -10287,7 +10407,7 @@ extern "C" {
     void test_mode_unlinked_func(void);
     void smd_test_select_init(undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4, undefined8 param_5, undefined8 param_6, undefined8 param_7, undefined8 param_8, undefined4 param_9, undefined4 param_10, undefined4 param_11, undefined4 param_12, undefined4 param_13, undefined4 param_14, undefined4 param_15, undefined4 param_16);
     void smd_test_select_main(void);
-    void test_select_draw_func(void);
+    undefined2 * test_select_draw_func(void);
     void smd_test_dip_init(void);
     void smd_test_dip_main(void);
     void smd_test_input_init(void);
@@ -10369,10 +10489,10 @@ extern "C" {
     void test_adx_draw_func(void);
     void test_newmotion_draw_func(void);
     void g_something_freeing_something_from_main_heap_2(void);
-    void gan_setanim_e5(undefined4 * param_1, char * param_2, int * param_3);
-    void gan_set_anim_e6(int param_1);
-    void gan_setanim_e7(int param_1, undefined4 param_2, int param_3);
-    void gan_setanim_e8(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, int param_5);
+    void g_ape_anim_unk5(undefined4 * param_1, char * param_2, int * param_3);
+    void g_ape_anim_unk6(int param_1);
+    uint g_ape_anim_unk7(int param_1, undefined4 param_2, int param_3);
+    void g_ape_anim_unk8(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, int param_5);
     void option_prolog(void);
     void option_epilog(void);
     void option_unlinked_func(void);
@@ -10417,7 +10537,6 @@ extern "C" {
     void mini_futsal_unlinked_func(void);
     void empty_function(void);
     void empty_function(void);
-    void load_bg_ape(void);
     void dogfight_unlinked_func(void);
     void g_load_dog(void);
     void g_some_printf_function_10(undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4, undefined8 param_5, undefined8 param_6, undefined8 param_7, undefined8 param_8, char * param_9, undefined4 param_10, undefined4 param_11, undefined4 param_12, undefined4 param_13, undefined4 param_14, undefined4 param_15, undefined4 param_16);

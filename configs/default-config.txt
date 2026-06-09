@@ -1,4 +1,4 @@
-// This is the config file for Workshop Mod 1.0.6!
+// This is the config file for Workshop Mod 1.5.0!
 // Place this in the root of your game directory, and name it config.txt
 // It should be in the same folder as the included REL file, mkb2.rel_sample.rel
 //
@@ -249,20 +249,28 @@
 	custom-menu-stage-id: -1
 	custom-music-id: disabled
 	custom-theme-id: disabled
+	custom-story-mode-entries: disabled
 	custom-world-count: 10
+	custom-font-color: disabled
+	custom-starting-monkey-count: 3
+	custom-banana-count-per-1up: 100
+	custom-reflection-resolution-width: 640
+	custom-reflection-resolution-height: 448
 	menu-option-toggle: disabled
 	challenge-mode-retry: disabled
 	challenge-mode-death-count: disabled
 	four-digit-banana-counter: disabled
 	goal-texture-scroll: disabled
+	goal-type-sprites: disabled
 	load-extra-bg-files: disabled
 	smb1-camera-toggle: disabled
 	stage-name-subtitles: disabled
-	fix-bonus-sprite: disabled
+	fix-bonus-stage-sprite: disabled
 	fix-final-stage: disabled
 	fix-goal-types: disabled
 	fix-minimap-color: disabled
 	fix-monkey-counter: disabled
+	fix-spooky-action: disabled
 	fix-stobj-draw: disabled
 	fix-stage-object-reflection: disabled
 	fix-storm-continue-platform: disabled
@@ -272,6 +280,7 @@
 	remove-1up-sprite: disabled
 	remove-ball-rolling-sound: disabled
 	remove-challenge-cutscenes: disabled
+	remove-challenge-game-settings: disabled
 	remove-desert-haze: disabled
 	remove-extras: disabled
 	remove-stage-slot-hardcodes: disabled
@@ -287,11 +296,11 @@
 	story-mode-music-fix: disabled
 	story-double-stage-select: disabled
 	story-fix-missing-w: disabled
+	autosave-on-by-default: disabled
 	pause-cooldown: disabled
 	perfect-bonus-completion: disabled
-	custom-font-color: enabled
-	font-primary: .ffff00
-	font-secondary: .ff8000
+	smb1-score-count: disabled
+	master-unlocked-by-default: disabled
 }
 
 // Toggles which menu options are accessible.
@@ -319,6 +328,22 @@
 	monkey-soccer: enabled
 	monkey-baseball: enabled
 	monkey-tennis: enabled
+}
+
+# Font Colors {
+	menu-primary: 0xFFC000
+	menu-secondary: 0xFFFF00
+	menu-option-name: 0x0000C0
+	current-stage-info: 0xFFFF00
+	ready: 0xFFC800
+	go: 0x0080FF
+	fallout-time-over: 0xFF8C00
+	spin-in-info: 0xFFFF00
+	final-stage-beginner: 0x00D000
+	final-stage-advanced: 0x0000E0
+	final-stage-expert: 0xFFC000
+	final-stage-master: 0xFFC000
+	bonus-stage: 0xFF8000
 }
 
 // Stage ID to theme ID mapping. Theme IDs are in decimal.
@@ -1183,4 +1208,107 @@
 	STAGE 418: 58
 	STAGE 419: 0
 	STAGE 420: 61
+}
+
+# Story Mode Entries {
+	W1-1: 201, 60, 1
+	W1-2: 202, 60, 2
+	W1-3: 203, 60, 1
+	W1-4: 204, 60, 2
+	W1-5: 1, 60, 6
+	W1-6: 2, 60, 3
+	W1-7: 3, 60, 2
+	W1-8: 4, 60, 8
+	W1-9: 5, 60, 6
+	W1-10: 6, 60, 2
+	W2-1: 7, 60, 2
+	W2-2: 8, 60, 5
+	W2-3: 9, 60, 3
+	W2-4: 10, 60, 6
+	W2-5: 11, 60, 7
+	W2-6: 12, 60, 3
+	W2-7: 13, 60, 7
+	W2-8: 14, 60, 6
+	W2-9: 15, 60, 8
+	W2-10: 16, 60, 6
+	W3-1: 231, 60, 3
+	W3-2: 232, 60, 8
+	W3-3: 233, 60, 6
+	W3-4: 234, 60, 6
+	W3-5: 235, 60, 4
+	W3-6: 236, 60, 3
+	W3-7: 237, 60, 3
+	W3-8: 238, 60, 8
+	W3-9: 239, 60, 3
+	W3-10: 17, 60, 3
+	W4-1: 18, 60, 2
+	W4-2: 19, 60, 8
+	W4-3: 20, 60, 5
+	W4-4: 21, 60, 1
+	W4-5: 22, 60, 6
+	W4-6: 23, 60, 9
+	W4-7: 24, 60, 6
+	W4-8: 25, 60, 8
+	W4-9: 26, 60, 8
+	W4-10: 27, 60, 10
+	W5-1: 28, 60, 3
+	W5-2: 29, 60, 7
+	W5-3: 30, 30, 4
+	W5-4: 31, 60, 8
+	W5-5: 32, 60, 3
+	W5-6: 33, 60, 5
+	W5-7: 34, 60, 2
+	W5-8: 35, 60, 6
+	W5-9: 36, 60, 10
+	W5-10: 37, 60, 4
+	W6-1: 38, 60, 8
+	W6-2: 39, 60, 8
+	W6-3: 40, 60, 5
+	W6-4: 41, 60, 5
+	W6-5: 42, 60, 5
+	W6-6: 43, 60, 9
+	W6-7: 44, 60, 9
+	W6-8: 45, 60, 5
+	W6-9: 46, 60, 9
+	W6-10: 47, 60, 2
+	W7-1: 281, 60, 4
+	W7-2: 282, 60, 5
+	W7-3: 283, 60, 7
+	W7-4: 284, 60, 6
+	W7-5: 285, 60, 4
+	W7-6: 286, 60, 8
+	W7-7: 287, 60, 9
+	W7-8: 288, 60, 9
+	W7-9: 289, 60, 10
+	W7-10: 48, 60, 5
+	W8-1: 49, 60, 9
+	W8-2: 50, 60, 8
+	W8-3: 51, 60, 10
+	W8-4: 52, 60, 9
+	W8-5: 53, 60, 8
+	W8-6: 54, 60, 9
+	W8-7: 55, 60, 10
+	W8-8: 56, 60, 10
+	W8-9: 57, 60, 6
+	W8-10: 58, 60, 7
+	W9-1: 59, 60, 10
+	W9-2: 60, 60, 10
+	W9-3: 61, 60, 8
+	W9-4: 62, 60, 9
+	W9-5: 63, 60, 10
+	W9-6: 64, 60, 7
+	W9-7: 65, 60, 8
+	W9-8: 66, 60, 8
+	W9-9: 67, 60, 6
+	W9-10: 68, 60, 10
+	W10-1: 341, 60, 8
+	W10-2: 342, 60, 9
+	W10-3: 343, 60, 9
+	W10-4: 344, 60, 9
+	W10-5: 345, 60, 8
+	W10-6: 346, 60, 9
+	W10-7: 347, 60, 7
+	W10-8: 348, 60, 8
+	W10-9: 349, 60, 9
+	W10-10: 350, 60, 6
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "../mkb/mkb.h"
 
 namespace fix_bonus_sprite {
 

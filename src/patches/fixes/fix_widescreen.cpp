@@ -3,6 +3,7 @@
 #include "internal/patch.h"
 #include "internal/tickable.h"
 #include "mkb/mkb.h"
+#include "patches/custom/custom_font_color.h"
 
 namespace fix_widescreen {
 
@@ -47,9 +48,18 @@ void create_new_bonus_finish_sprite(u8* status, mkb::Sprite* sprite) {
         pSVar1->alignment = mkb::ALIGN_CENTER;
         pSVar1->g_counter = 0;
         pSVar1->para1 = 0;
-        pSVar1->mult_color.red = 0xff;
-        pSVar1->mult_color.green = 0x80;
-        pSVar1->mult_color.blue = 0;
+
+        if (tickable::get_tickable_manager().get_tickable_status("custom-font-color")) {
+            pSVar1->mult_color.red = (custom_font_color::fallout_time_over_color >> 16) & 0xff;
+            pSVar1->mult_color.green = (custom_font_color::fallout_time_over_color >> 8) & 0xff;
+            pSVar1->mult_color.blue = custom_font_color::fallout_time_over_color & 0xff;
+        }
+        else {
+            pSVar1->mult_color.red = 0xff;
+            pSVar1->mult_color.green = 0x80;
+            pSVar1->mult_color.blue = 0;
+        }
+
         pSVar1->width = 0.8;
         pSVar1->height = 0.8;
         pSVar1->widescreen_translation_x = 0x140;

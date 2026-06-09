@@ -2,6 +2,7 @@
 
 #include "internal/patch.h"
 #include "internal/tickable.h"
+#include "patches/custom/custom_font_color.h"
 #include "utils/ppcutil.h"
 
 namespace fix_bonus_sprite {
@@ -25,20 +26,31 @@ void new_bonus_sprite_tick(u8* status, mkb::Sprite* sprite) {
 }
 
 void create_bonus_sprite(void) {
-    // Check if we're on a bonus stage and if the sprite already exists
-    mkb::Sprite* special_stage_text_sprite = mkb::get_sprite_with_unique_id(mkb::SPRITE_SPECIAL_STAGE);
+    mkb::Sprite* special_stage_text_sprite =
+        mkb::get_sprite_with_unique_id(mkb::SPRITE_SPECIAL_STAGE);
+
     if ((special_stage_text_sprite == (mkb::Sprite*) 0x0) &&
         ((mkb::mode_info.ball_mode & mkb::BALLMODE_ON_BONUS_STAGE) != mkb::BALLMODE_NONE)) {
-        // Create the sprite
+
         mkb::Sprite* sprite;
         sprite = mkb::create_sprite();
+
         if (sprite != (mkb::Sprite*) 0x0) {
             sprite->unique_id = mkb::SPRITE_SPECIAL_STAGE;
             (sprite->pos).x = 500.0;
             (sprite->pos).y = 452.0;
-            (sprite->mult_color).red = 0xff;
-            (sprite->mult_color).green = 0x80;
-            (sprite->mult_color).blue = '\0';
+
+            if (tickable::get_tickable_manager().get_tickable_status("custom-font-color")) {
+                sprite->mult_color.red = (custom_font_color::bonus_stage_color >> 16) & 0xff;
+                sprite->mult_color.green = (custom_font_color::bonus_stage_color >> 8) & 0xff;
+                sprite->mult_color.blue = custom_font_color::bonus_stage_color & 0xff;
+            }
+            else {
+                sprite->mult_color.red = 0xff;
+                sprite->mult_color.green = 0x80;
+                sprite->mult_color.blue = 0;
+            }
+
             sprite->font = mkb::FONT_ASC_72x64;
             sprite->alignment = mkb::ALIGN_CENTER;
             sprite->width = 0.3;
