@@ -16,6 +16,8 @@ static constexpr int STAGES_PER_WORLD = 10;
 
 extern NewStoryStageEntry new_story_entries[WORLD_COUNT][STAGES_PER_WORLD];
 
+extern char world_names[WORLD_COUNT][64];
+
 extern "C" {
 
 // Assembly overwrite functions

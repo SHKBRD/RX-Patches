@@ -6517,6 +6517,7 @@ extern "C" {
     extern pointer switchdataD_804ee064;
     extern undefined * story_mode_funcs;
     extern struct StoryStagePreviewParam MAIN_GAME_STORY_STAGE_PREVIEW_PARAMS[100];
+    extern char * world_names[60];
     extern undefined1 ape_story_select_anim_table;
     extern pointer switchdataD_804eee68;
     extern pointer switchdataD_804eee88;
@@ -9575,7 +9576,7 @@ extern "C" {
     void calc_sprite_bounds(struct Sprite * sprite, s32 * left, s32 * top, s32 * right, s32 * bottom);
     void g_get_font_char_width(char * character, Font32  font, struct FontDefinition * g_font_struct);
     double g_get_font_char_width_scaling(char * character, Font32  font);
-    undefined * textdraw_parse_control_code(uint * state, byte * text, uint * color, int * consumed, uint * font);
+    undefined * g_some_textdraw_control_code_parse(uint * state, byte * text, uint * color, int * consumed, uint * font);
     void textdraw_reset(void);
     void textdraw_set_font(Font32  font_type);
     void textdraw_set_mul_color(uint param_1);

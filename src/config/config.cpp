@@ -232,6 +232,54 @@ void parse_story_mode_entries(char* buf) {
     LOG("Story Mode Entries loaded at: 0x%X", &main::new_story_entries);
 }
 
+void parse_world_names(char* buf) {
+    buf = mkb::strchr(buf, '\n') + 1;
+
+    char* end_of_section = mkb::strchr(buf, '}');
+    char key[64] = {0};
+    char value[64] = {0};
+    bool seen[main::WORLD_COUNT] = {false};
+
+    do {
+        char *key_start, *key_end, *end_of_line;
+        key_start = mkb::strchr(buf, '\t') + 1;
+        key_end = mkb::strchr(buf, ':');
+        MOD_ASSERT_MSG(key_start < key_end,
+                       "Key start after key end, did you start your key with a tab and not spaces?");
+        end_of_line = mkb::strchr(buf, '\n');
+
+        mkb::strncpy(key, key_start, key_end - key_start);
+        mkb::strncpy(value, key_end + 2, (end_of_line - key_end) - 2);
+
+        MOD_ASSERT_MSG(key[0] == 'W', "Invalid world name key format, expected W<1-10>");
+
+        int world_idx = mkb::atoi(key + 1) - 1;
+
+        MOD_ASSERT_MSG(world_idx >= 0 && world_idx < main::WORLD_COUNT,
+                       "World name index out of range");
+        MOD_ASSERT_MSG(!seen[world_idx],
+                       "Duplicate World Name entry");
+
+        mkb::strncpy(
+            main::world_names[world_idx],
+            value,
+            sizeof(main::world_names[world_idx]) - 1);
+
+        main::world_names[world_idx][sizeof(main::world_names[world_idx]) - 1] = '\0';
+        seen[world_idx] = true;
+
+        buf = end_of_line + 1;
+        mkb::memset(key, '\0', sizeof(key));
+        mkb::memset(value, '\0', sizeof(value));
+    } while (buf < end_of_section);
+
+    for (int i = 0; i < main::WORLD_COUNT; ++i) {
+        MOD_ASSERT_MSG(seen[i], "Missing World Name entry");
+    }
+
+    LOG("World Names loaded at: 0x%X", &main::world_names);
+}
+
 void parse_font_colors(char* buf) {
     buf = mkb::strchr(buf, '\n') + 1;
 
@@ -424,6 +472,10 @@ void parse_config() {
 
                     else if (STREQ(section, "Story Mode Entries")) {
                         parse_story_mode_entries(section_end);
+                    }
+
+                    else if (STREQ(section, "World Names")) {
+                        parse_world_names(section_end);
                     }
 
                     else {

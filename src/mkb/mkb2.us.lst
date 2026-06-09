@@ -5762,7 +5762,7 @@
 8031FA50:caseD_6
 8031FAF0:g_get_font_char_width
 8031FC14:g_get_font_char_width_scaling
-8031FE7C:textdraw_parse_control_code
+8031FE7C:g_some_textdraw_control_code_parse
 8031FFE8:switchD
 8031FFEC:caseD_30
 8031FFF4:caseD_31
@@ -9802,6 +9802,7 @@
 809160E0:switchdataD_804ee064
 809162D8:story_mode_funcs
 809168A0:MAIN_GAME_STORY_STAGE_PREVIEW_PARAMS
+80916D38:world_names
 80916E78:ape_story_select_anim_table
 80916EE4:switchdataD_804eee68
 80916F04:switchdataD_804eee88
