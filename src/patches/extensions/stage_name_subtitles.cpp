@@ -5,6 +5,7 @@
 #include "internal/patch.h"
 #include "internal/tickable.h"
 #include "mkb/mkb.h"
+#include "patches/custom/custom_font_color.h"
 
 
 // Allows for subtitles to be displayed under the stage name.
@@ -47,9 +48,16 @@ void sprite_init(float x, float y) {
         sprite->fpara1 = 1.0;
         sprite->fpara2 = 0.0;
         sprite->alpha = 0.0;
-        (sprite->mult_color).red = 0xff;
-        (sprite->mult_color).green = 0xff;
-        (sprite->mult_color).blue = 0x00;
+        if (tickable::get_tickable_manager().get_tickable_status("custom-font-color")) {
+            sprite->mult_color.red = (custom_font_color::current_stage_info_color >> 16) & 0xff;
+            sprite->mult_color.green = (custom_font_color::current_stage_info_color >> 8) & 0xff;
+            sprite->mult_color.blue = custom_font_color::current_stage_info_color & 0xff;
+        }
+        else {
+            sprite->mult_color.red = 0xff;
+            sprite->mult_color.green = 0xff;
+            sprite->mult_color.blue = 0x00;
+        }
         sprite->width = 0.6;
         sprite->height = 0.6;
         sprite->field21_0x20 = 1.0;
