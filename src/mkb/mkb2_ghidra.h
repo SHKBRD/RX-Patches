@@ -5903,7 +5903,7 @@ extern "C" {
     extern undefined * switchdataD_8037ed54;
     extern pointer switchdataD_8037ed78;
     extern undefined * switchdataD_8037edf8;
-    extern struct theme_light theme_lights[41];
+    extern struct theme_light theme_lights[42];
     extern char init_common_p_lz[17];
     extern char init_common_lz[15];
     extern struct BmpInfo bmp_infos[25];
@@ -9065,6 +9065,7 @@ extern "C" {
     void g_draw_start_position_marker(void);
     void g_draw_stage(void);
     void g_draw_collision_triangles(void);
+    void g_draw_transparency_type_a_models(void);
     bool is_stage_id_348_revolution(void);
     void g_special_handler_for_st348_revolution(void);
     void g_handle_hardcoded_special_case_stages(void);

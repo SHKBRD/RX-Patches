@@ -4789,7 +4789,7 @@
 802CA1E0:g_draw_start_position_marker
 802CA460:g_draw_stage
 802CA770:g_draw_collision_triangles
-802CA828:FUN_801f45f0
+802CA828:g_draw_transparency_type_a_models
 802CA9E4:is_stage_id_348_revolution
 802CAA0C:g_special_handler_for_st348_revolution
 802CAA2C:g_handle_hardcoded_special_case_stages
