@@ -146,8 +146,6 @@ static bool parse_csv_ints(char* value, int* out, int count) {
     return true;
 }
 
-
-// Parses W<world>-<stage>
 static bool parse_world_stage_key(const char* key, int& world_idx, int& stage_idx) {
     if (key == nullptr || key[0] != 'W') return false;
 
@@ -169,6 +167,35 @@ static bool parse_world_stage_key(const char* key, int& world_idx, int& stage_id
     return true;
 }
 
+static bool parse_csv_lighting(char* value, float* floats, int* hexes) {
+    char* p = value;
+
+    for (int i = 0; i < 6; ++i) {
+        skip_spaces(p);
+        floats[i] = mkb::atof(p);
+
+        p = mkb::strchr(p, ',');
+        if (!p) return false;
+        p++;
+    }
+
+    for (int i = 0; i < 2; ++i) {
+        skip_spaces(p);
+
+        MOD_ASSERT_MSG(p[0] == '0' && (p[1] == 'x' || p[1] == 'X'),
+                       "Lighting angle values must be hex");
+
+        hexes[i] = parse_hex_value(p);
+
+        if (i + 1 < 2) {
+            p = mkb::strchr(p, ',');
+            if (!p) return false;
+            p++;
+        }
+    }
+
+    return true;
+}
 
 void parse_story_mode_entries(char* buf) {
     buf = mkb::strchr(buf, '\n') + 1;
@@ -342,6 +369,67 @@ void parse_font_colors(char* buf) {
     } while (buf < end_of_section);
 }
 
+void parse_theme_lights(char* buf) {
+    buf = mkb::strchr(buf, '\n') + 1;
+
+    char* end_of_section = mkb::strchr(buf, '}');
+    char key[64] = {0};
+    char value[128] = {0};
+
+    do {
+        char *key_start, *key_end, *end_of_line;
+        key_start = mkb::strchr(buf, '\t') + 1;
+        key_end = mkb::strchr(buf, ':');
+        end_of_line = mkb::strchr(buf, '\n');
+
+        MOD_ASSERT_MSG(key_start < key_end,
+                       "Key start after key end, did you start your key with a tab and not spaces?");
+
+        mkb::strncpy(key, key_start, key_end - key_start);
+        mkb::strncpy(value, key_end + 2, (end_of_line - key_end) - 2);
+
+        int idx = mkb::atoi(key);
+
+        MOD_ASSERT_MSG(idx >= 0 && idx < main::THEME_LIGHT_COUNT,
+                       "Theme light index out of range");
+
+        main::CustomThemeLight& light = main::custom_theme_lights[idx];
+
+        MOD_ASSERT_MSG(!light.set, "Duplicate Theme Light entry");
+
+        float f[6] = {0};
+        int h[2] = {0};
+
+        MOD_ASSERT_MSG(
+            parse_csv_lighting(value, f, h),
+            "Invalid theme light format");
+
+        for (int i = 0; i < 6; ++i) {
+            MOD_ASSERT_MSG(f[i] >= 0.0f && f[i] <= 1.0f,
+                           "Lighting RGB value out of range, expected 0.00 to 1.00");
+        }
+
+        light.light_group_r = f[0];
+        light.light_group_g = f[1];
+        light.light_group_b = f[2];
+
+        light.light_param_r = f[3];
+        light.light_param_g = f[4];
+        light.light_param_b = f[5];
+
+        light.xa = static_cast<s16>(h[0]);
+        light.ya = static_cast<s16>(h[1]);
+
+        light.set = true;
+
+        buf = end_of_line + 1;
+        mkb::memset(key, '\0', sizeof(key));
+        mkb::memset(value, '\0', sizeof(value));
+    } while (buf < end_of_section);
+
+    LOG("Theme Lights loaded at: 0x%X", &main::custom_theme_lights);
+}
+
 void parse_function_toggles(char* buf) {
     // Enters from section parsing, so skip to the next line
     buf = mkb::strchr(buf, '\n') + 1;
@@ -476,6 +564,10 @@ void parse_config() {
 
                     else if (STREQ(section, "World Names")) {
                         parse_world_names(section_end);
+                    }
+
+                    else if (STREQ(section, "Theme Lights")) {
+                        parse_theme_lights(section_end);
                     }
 
                     else {

@@ -18,6 +18,25 @@ extern NewStoryStageEntry new_story_entries[WORLD_COUNT][STAGES_PER_WORLD];
 
 extern char world_names[WORLD_COUNT][64];
 
+static constexpr int THEME_LIGHT_COUNT = 42;
+
+struct CustomThemeLight {
+    float light_group_r;
+    float light_group_g;
+    float light_group_b;
+
+    float light_param_r;
+    float light_param_g;
+    float light_param_b;
+
+    s16 xa;
+    s16 ya;
+
+    bool set;
+};
+
+extern CustomThemeLight custom_theme_lights[THEME_LIGHT_COUNT];
+
 extern "C" {
 
 // Assembly overwrite functions

@@ -20,4 +20,6 @@ char world_names[WORLD_COUNT][64] = {
     "Dr. BAD-BOON's Base",
 };
 
+CustomThemeLight custom_theme_lights[THEME_LIGHT_COUNT];
+
 }// namespace main
