@@ -11,10 +11,18 @@ TICKABLE_DEFINITION((
         .description = "Transparency Type B texture scroll fix",
         .init_main_loop = init_main_loop, ))
 
-// Always return 'true' for a specific instruction that checks if the texture should
-// scroll or not on transparency type B stage models
+static patch::Tramp<decltype(&mkb::g_something_with_texture_scroll)> s_g_something_with_texture_scroll_tramp;
+
+// g_something_with_texture_scroll updates the scroll matrix, but does not enable
+// the texture matrix flag used by sorted draw nodes. Transparency type B models
+// use sort_always, so we enable texture scrolling before the original function builds
+// the matrix so the sorted draw node accounts for it
+
 void init_main_loop() {
-    patch::write_word(reinterpret_cast<void*>(0x802c94f8), PPC_INSTR_LI(PPC_R3, 0x1));
+    patch::hook_function(s_g_something_with_texture_scroll_tramp, mkb::g_something_with_texture_scroll, [](mkb::StagedefTextureScroll* tex_scroll) {
+        mkb::g_something_with_texture_scroll_2(1);
+        s_g_something_with_texture_scroll_tramp.dest(tex_scroll);
+    });
 }
 
 }// namespace fix_transparency_type_b_texture_scroll
