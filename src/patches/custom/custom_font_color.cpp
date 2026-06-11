@@ -8,7 +8,7 @@
 namespace custom_font_color {
 
 TICKABLE_DEFINITION((
-        .name = "custom-font-color",
+        .name = "custom-font-colors",
         .description = "Custom font colors",
         .init_main_loop = init_main_loop,
         .init_main_game = init_main_game,

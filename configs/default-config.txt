@@ -1,4 +1,4 @@
-// This is the config file for Workshop Mod 1.5.0!
+// This is the config file for Workshop Mod 2.0.0!
 // Place this in the root of your game directory, and name it config.txt
 // It should be in the same folder as the included REL file, mkb2.rel_sample.rel
 //
@@ -28,7 +28,7 @@
 // Prevents the world music from being interrupted by the stage select music 
 // in Story Mode.
 
-// remove-music-vol-decrease-on-pause
+// remove-volume-decrease-on-pause
 //
 // Prevents the music volume from being lowered when the game is paused.
 
@@ -45,7 +45,7 @@
 // Challenge mode has infinite lives, and the life counter is converted into 
 // a counter that tracks the number of deaths.
 
-// remove-how-to-play-screen
+// remove-tutorial
 //
 // Disables the tutorial/ranking sequence that shows up when the player goes 
 // idle at the title screen.
@@ -72,7 +72,7 @@
 // Draws theme ID data from a per-stage list, defined below, instead of using
 // the built-in list.
 
-// remove-intro-movie
+// remove-intro-cutscene
 //
 // Skips the AV logo and intro movie sequence on game start, immediately
 // skipping to the title screen.
@@ -169,7 +169,7 @@
 // as well as separate multiple theme IDs which read the same set of background files to load
 // their own
 
-// fix-bonus-sprite
+// fix-bonus-stage-sprite
 //
 // Fixes an issue where the 'BONUS STAGE' sprite would disappear upon respawn on a bonus stage
 // in Practice Mode
@@ -232,13 +232,94 @@
 // Changes the stage ID used on the main menu. Setting this to -1 will lead to
 // default behavior (where the menu stage ID also uses more than one stage ID)
 
-// custom-font-color
-// font-primary
-// font-secondary
+// custom-font-colors
 //
-// Changes the colors of most yellow/orange text in the menus to the designated
-// primary & secondary color hex codes
-// hex codes have a period (.) in front, such as: .ff0000 (for red)
+// Changes the colors of most text in the menus and in-game to custom colors based off the 
+// Font Colors list, defined below.
+
+// custom-theme-lights
+//
+// Allows the lighting for each theme ID to be user-defined based off the Theme Lights
+// list, defined below.
+
+// custom-story-mode-entries
+//
+// Allows the stage IDs, time limits, and difficulties for Story Mode stages to be user-defined
+// based off the Story Mode Entries list, defined below.
+
+// custom-world-names
+//
+// Allows the names for the 10 worlds in Story Mode to be user-defined based off the
+// World Names list, defined below.
+
+// custom-credits-stage-id
+//
+// Changes the stage ID used during the credits minigame.
+
+// custom-name-entry-stage-id
+//
+// Changes the stage ID used during the name entry sequence.
+
+// custom-starting-monkey-count
+//
+// Changes the default number of monkeys unlocked.
+
+// custom-banana-count-per-1up
+//
+// Changes the amount of bananas needed for a 1UP.
+
+// custom-reflection-resolution-width
+//
+// Changes the width of the image used for stage mirrors.
+// Smaller values free up heap and may prevent crashing, but 
+// do not save on performance.
+
+// custom-reflection-resolution-height
+//
+// Changes the height of the image used for stage mirrors.
+// Smaller values free up heap and may prevent crashing, but 
+// do not save on performance.
+
+// goal-type-sprites
+//
+// Adds in-game sprites underneath the SCORE which indicate which goal types
+// exist on the current stage.
+
+// fix-spooky-action
+//
+// Fixes an issue where accumulated floating-point error during collision
+// calculations may apply a small undesired position/velocity to the ball. This is
+// most noticeable on stages with many, fast, or very rotational animations.
+
+// remove-challenge-game-settings
+//
+// Prevents the Game Settings screen which allows the player to set monkey
+// count from appearing when starting Challenge Mode. Useful for locking 
+// the monkey count or when using the death counter patch.
+
+// remove-menu-icon-brown-color
+//
+// Prevents icons on the Main Game Select and Number of Players screen from
+// forcefully being turned brown, regardless of their texture's color.
+
+// remove-secondary-theme-lights
+//
+// Disables the hardcoded secondary lighting effects in the Volcanic Magma and
+// Dr. BAD-BOON's Base themes. Useful for custom lighting.
+
+// autosave-on-by-default
+//
+// Enables autosave by default, not requiring the user to enable it themselves.
+
+// smb1-score-count
+//
+// Makes the Main Game score sprite act like SMB1's, playing the sound effect
+// as well.
+
+// master-unlocked-by-default
+//
+// Unlocks Master by default.
+
 
 // ----------------------------------------------------------------------------
 
@@ -247,12 +328,15 @@
 
 # REL Patches {
 	custom-menu-stage-id: -1
+	custom-credits-stage-id: 197
+	custom-name-entry-stage-id: 200
 	custom-music-id: disabled
 	custom-theme-id: disabled
 	custom-theme-lights: disabled
 	custom-story-mode-entries: disabled
 	custom-world-count: 10
-	custom-font-color: disabled
+	custom-world-names: disabled
+	custom-font-colors: disabled
 	custom-starting-monkey-count: 3
 	custom-banana-count-per-1up: 100
 	custom-reflection-resolution-width: 640
@@ -290,6 +374,7 @@
 	remove-intro-cutscene: disabled
 	remove-menu-icon-brown-color: disabled
 	remove-playpoints: disabled
+	remove-secondary-theme-lights: disabled
 	remove-story-cutscenes: disabled
 	remove-tutorial: disabled
 	remove-volume-decrease-on-pause: disabled
@@ -331,6 +416,11 @@
 	monkey-baseball: enabled
 	monkey-tennis: enabled
 }
+
+// Font color mapping.
+// The default, vanilla font colors are provided for your convenience.
+// Each color is formatted as a hex RGB value.
+// Requires the patch 'custom-font-colors' to be enabled.
 
 # Font Colors {
 	menu-primary: 0xFFC000
@@ -1212,6 +1302,14 @@
 	STAGE 420: 61
 }
 
+// Story Mode mapping.
+// Regardless of custom world count, all 100 default entries
+// should be present.
+// Format is as follows:
+// <stage ID>, <time (in seconds)>, <difficulty>
+// The default, vanilla Story Mode entries are provided for your convenience.
+// Requires the patch 'custom-story-mode-entries' to be enabled.
+
 # Story Mode Entries {
 	W1-1: 201, 60, 1
 	W1-2: 202, 60, 2
@@ -1314,6 +1412,32 @@
 	W10-9: 349, 60, 9
 	W10-10: 350, 60, 6
 }
+
+// Story Mode world names
+// Names should be 64 characters or less.
+// The default, vanilla world names are provided for your convenience.
+// Requires the patch 'custom-world-names' to be enabled.
+
+# World Names {
+	W1: Jungle Island
+	W2: Volcanic Magma
+	W3: Under the Ocean
+	W4: Inside a Whale
+	W5: Amusement Park
+	W6: Boiling Pot
+	W7: Bubbly Washing Machine
+	W8: Clock Tower Factory
+	W9: Space Colony
+	W10: Dr. BAD-BOON's Base
+}
+
+// Theme lighting configuration.
+// Entries are numbered corresponding to theme ID.
+// A theme ID list is included with the download of this mod.
+// The default, vanilla lighting values are provided for your convenience.
+// Format is as follows:
+// <Light Group R>, <Light Group G>, <Light Group B>, <Light Param R>, <Light Param G>, <Light Param B>, <xa>, <ya>
+// Requires the patch 'custom-theme-lights' to be enabled.
 
 # Theme Lights {
 	0: 0.80, 0.80, 0.80, 1.00, 1.00, 1.00, 0x2000, 0x6000
